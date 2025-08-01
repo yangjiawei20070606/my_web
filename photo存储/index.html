@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给覃钰淇的情人节礼物</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>亲爱的覃钰淇 <span class="heart">❤️</span></h1>
+
+        <div class="memories-container">
+            <div class="memories-section">
+                <h2 class="section-title">美好时光</h2>
+                <div class="happy-memories">
+                    <div class="photo-frame happy-main">
+                        <img src="static/images/快乐时光1.jpg" alt="美好时光1">
+                    </div>
+                    <div class="happy-stack">
+                        <div class="photo-frame happy-sub">
+                            <img src="static/images/快乐时光2.jpg" alt="美好时光2">
+                        </div>
+                        <div class="photo-frame happy-sub">
+                            <img src="static/images/快乐时光3.jpg" alt="美好时光3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memories-section">
+                <h2 class="section-title">共进晚餐</h2>
+                <div class="dinner-row">
+                    <div class="photo-frame dinner-half">
+                        <img src="static/images/晚餐1.jpg" alt="晚餐时刻1">
+                    </div>
+                    <div class="photo-frame dinner-half">
+                        <img src="static/images/晚餐2.jpg" alt="晚餐时刻2">
+                    </div>
+                </div>
+                <div class="dinner-row">
+                    <div class="photo-frame dinner-full">
+                        <img src="static/images/晚餐3.jpg" alt="晚餐时刻3">
+                    </div>
+                </div>
+                <div class="dinner-row">
+                    <div class="photo-frame dinner-full">
+                        <img src="static/images/晚餐4.jpg" alt="晚餐时刻4">
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message">
+            <p>遇见你是我生命中最美好的意外，</p>
+            <p>每一天因为有你而变得更加珍贵。</p>
+            <p>在这个特别的日子里，我想对你说...</p>
+        </div>
+
+        <button id="surpriseBtn">点击查看我的真心</button>
+    </div>
+
+    <div class="footer">
+        <a href="entry.html" class="back-link">返回</a>
+    </div>
+
+    <div class="music-player">
+        <button id="musicBtn">🎵</button>
+        <audio id="bgMusic" loop>
+            <source src="music.mp3" type="audio/mpeg">
+            您的浏览器不支持音频元素。
+        </audio>
+    </div>
+
+    <script>
+        // 惊喜按钮点击事件
+        document.getElementById('surpriseBtn').addEventListener('click', function() {
+            alert('覃钰淇，我爱你！情人节快乐！');
+            createHearts();
+        });
+
+        // 音乐播放器控制
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', function() {
+            if(isPlaying) {
+                bgMusic.pause();
+                musicBtn.textContent = '🎵';
+            } else {
+                bgMusic.play();
+                musicBtn.textContent = '🔊';
+            }
+            isPlaying = !isPlaying;
+        });
+
+
+        // 增强版爱心雨效果
+        let heartsInterval;
+        const heartColors = ['#ff0000', '#ff69b4', '#ff1493', '#ff00ff', '#ff6347', '#ff8c00'];
+        const heartShapes = ['❤️', '💖', '💗', '💓', '💞', '💕'];
+
+        function createHearts() {
+            let isRaining = false;
+            
+            // 如果已经在下雨，先停止
+            if(heartsInterval) {
+                clearInterval(heartsInterval);
+                document.querySelectorAll('.heart-rain').forEach(el => el.remove());
+            }
+
+            // 开始新的爱心雨
+            isRaining = true;
+            let heartCount = 0;
+            const maxHearts = 300; // 最大爱心数量
+            
+            heartsInterval = setInterval(() => {
+                if(heartCount >= maxHearts) {
+                    clearInterval(heartsInterval);
+                    return;
+                }
+                
+                for(let i = 0; i < 5; i++) { // 每帧创建5个爱心
+                    createSingleHeart();
+                    heartCount++;
+                }
+            }, 200);
+
+            // 30秒后自动停止
+            setTimeout(() => {
+                if(isRaining) {
+                    clearInterval(heartsInterval);
+                    document.querySelectorAll('.heart-rain').forEach(el => {
+                        el.style.opacity = '0';
+                        setTimeout(() => el.remove(), 1000);
+                    });
+                }
+            }, 30000);
+        }
+
+        function createSingleHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-rain';
+            
+            // 随机属性
+            const size = Math.random() * 30 + 15;
+            const left = Math.random() * 100;
+            const animationDuration = Math.random() * 4 + 3;
+            const delay = Math.random() * 2;
+            const shape = heartShapes[Math.floor(Math.random() * heartShapes.length)];
+            const color = heartColors[Math.floor(Math.random() * heartColors.length)];
+            const opacity = Math.random() * 0.7 + 0.3;
+            const rotation = Math.random() * 30 - 15;
+            
+            // 设置样式
+            heart.innerHTML = shape;
+            heart.style.cssText = `
+                position: fixed;
+                font-size: ${size}px;
+                left: ${left}vw;
+                top: -50px;
+                color: ${color};
+                opacity: ${opacity};
+                z-index: 9999;
+                pointer-events: none;
+                transform: rotate(${rotation}deg);
+                will-change: transform, opacity;
+                animation: heart-fall ${animationDuration}s ease-in ${delay}s forwards;
+            `;
+            
+            document.body.appendChild(heart);
+            
+            // 动画结束后移除
+            heart.addEventListener('animationend', function() {
+                heart.remove();
+            });
+        }
+
+        // 添加爱心雨动画样式
+        if(!document.getElementById('heart-rain-style')) {
+            const style = document.createElement('style');
+            style.id = 'heart-rain-style';
+            style.innerHTML = `
+                @keyframes heart-fall {
+                    0% {
+                        transform: translateY(0) rotate(0deg);
+                        opacity: 1;
+                    }
+                    80% {
+                        opacity: 0.8;
+                    }
+                    100% {
+                        transform: translateY(100vh) rotate(${Math.random() * 60 - 30}deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    </script>
+</body>
+</html>
