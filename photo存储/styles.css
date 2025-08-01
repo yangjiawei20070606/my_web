@@ -1,0 +1,230 @@
+/* 基础样式 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffebee;
+    color: #d81b60;
+    text-align: center;
+    transition: background-color 0.5s;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    animation: fadeIn 2s;
+}
+
+/* 心跳动画 */
+.heart {
+    font-size: 2em;
+    animation: heartbeat 1.5s infinite;
+    display: inline-block;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* 相框样式 */
+.photo-frame {
+    margin: 30px auto;
+    width: 300px;
+    height: 300px;
+    border: 10px solid white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    background-color: #f8bbd0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('placeholder.jpg');
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s;
+}
+
+.photo-frame:hover {
+    transform: scale(1.05);
+}
+
+/* 文字消息样式 */
+.message {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin: 30px 0;
+    opacity: 0;
+    animation: fadeIn 2s forwards 1s;
+}
+
+/* 按钮样式 */
+button {
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: all 0.3s;
+    opacity: 0;
+    animation: fadeIn 2s forwards 2s;
+}
+
+button:hover {
+    background-color: #c2185b;
+    transform: scale(1.05);
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* 新增分区样式 */
+.memories-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section-title {
+    color: #d81b60;
+    text-align: center;
+    font-size: 28px;
+    margin: 40px 0 30px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.photos-grid .photo-frame {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    border: 8px solid white;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f8f8;
+}
+
+.photos-grid .photo-frame img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 晚餐第三张图片特殊样式 */
+.photos-grid .dinner-special {
+    width: 150px;
+    height: 150px;
+}
+
+.photos-grid .dinner-special img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 美好时光新布局样式 */
+.happy-memories {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 40px;
+    display: flex;
+    align-items: stretch; /* 确保高度对齐 */
+    gap: 20px;
+}
+
+.happy-main {
+    width: 56%;
+    height: 420px;
+    aspect-ratio: 3/2;
+    border: 8px solid white;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    background-color: #ffebee;
+}
+
+.happy-stack {
+    width: 36%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.happy-sub {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3/2;
+    border: 8px solid white;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    background-color: #ffebee;
+}
+
+.happy-main img,
+.happy-sub img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 晚餐图片新布局样式 */
+.dinner-row {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.dinner-half {
+    width: 48%;
+    height: 250px;
+    border: 8px solid white;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.dinner-full {
+    width: 100%;
+    height: 350px;
+    border: 8px solid white;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.dinner-half img,
+.dinner-full img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photos-grid .photo-frame:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
